@@ -1,17 +1,23 @@
 import Tweet from "./Tweet";
-import { useEffect, useState } from "react";
 
-export default function LastTweets() {
-  const [tweetData, setTweetData] = useState([]);
+type LastTweetsProps = {
+  tweetData: any[];
+  date: string;
+};
 
-  useEffect(() => {
-    fetch("http://localhost/3001/tweets/n");
-  }, []);
+export default function LastTweets({ tweetData, date }: LastTweetsProps) {
+  const tweets = tweetData.map((data, index) => {
+    return (
+      <Tweet
+        key={index}
+        firstname={data.user.firstname}
+        username={data.user.username}
+        tweetContent={data.tweetContent}
+        date={date}
+        tag={data.tag}
+      />
+    );
+  });
 
-  return (
-    <div>
-      <Tweet />
-      <Tweet />
-    </div>
-  );
+  return <div>{tweets}</div>;
 }
