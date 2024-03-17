@@ -67,7 +67,7 @@ export default function Home() {
         }}
       >
         <NewTweet addNewTweet={addNewTweet} date={date} />
-        <LastTweets tweetData={tweetData} date={date} />
+        <LastTweets tweetData={tweetData} date={date} token={user.token} />
       </div>
       <div className="w-2/6 border-l border-slate-700"></div>
     </div>

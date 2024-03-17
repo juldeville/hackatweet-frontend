@@ -3,9 +3,16 @@ import Tweet from "./Tweet";
 type LastTweetsProps = {
   tweetData: any[];
   date: string;
+  token?: string;
 };
 
-export default function LastTweets({ tweetData, date }: LastTweetsProps) {
+export default function LastTweets({
+  tweetData,
+  date,
+  token,
+}: LastTweetsProps) {
+  console.log("tweetData is", tweetData);
+
   const tweets = tweetData.map((data, index) => {
     return (
       <Tweet
@@ -15,6 +22,10 @@ export default function LastTweets({ tweetData, date }: LastTweetsProps) {
         tweetContent={data.tweetContent}
         date={date}
         tag={data.tag}
+        tweetId={data._id}
+        token={token}
+        likeCount={data.likeCount}
+        likes={data.likes}
       />
     );
   });
