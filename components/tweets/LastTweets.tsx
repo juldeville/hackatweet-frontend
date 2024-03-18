@@ -11,9 +11,7 @@ export default function LastTweets({
   date,
   token,
 }: LastTweetsProps) {
-  console.log("tweetData is", tweetData);
-
-  const tweets = tweetData.map((data, index) => {
+  const tweets = tweetData.toReversed().map((data, index) => {
     return (
       <Tweet
         key={index}
@@ -26,6 +24,7 @@ export default function LastTweets({
         token={token}
         likeCount={data.likeCount}
         likes={data.likes}
+        liked={data.liked}
       />
     );
   });

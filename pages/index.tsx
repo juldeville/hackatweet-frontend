@@ -25,7 +25,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/tweets/getTweets")
+    fetch(`http://localhost:3000/tweets/getTweets/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         setTweetData(data.tweets);
@@ -55,8 +55,8 @@ export default function Home() {
             className="rounded-full"
           />
           <div>
-            <div>John</div>
-            <div>@JohnCena</div>
+            <div>{user.firstname}</div>
+            <div>@{user.username}</div>
           </div>
         </div>
       </div>

@@ -13,6 +13,7 @@ export type TweetProps = {
   token?: string;
   likeCount?: number;
   likes?: [string];
+  liked: boolean;
 };
 
 export default function Tweet({
@@ -24,6 +25,7 @@ export default function Tweet({
   tweetId,
   token,
   likeCount,
+  liked,
 }: TweetProps) {
   const [likeCounter, setLikeCounter] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
@@ -33,6 +35,7 @@ export default function Tweet({
   useEffect(() => {
     if (likeCount) {
       setLikeCounter(likeCount);
+      setIsLiked(liked);
     }
   }, []);
 
@@ -48,8 +51,12 @@ export default function Tweet({
       .then((response) => response.json())
       .then((data: any) => {
         setLikeCounter(data.likeCount);
+        setIsLiked(!isLiked);
       });
   };
+
+  let color = isLiked ? "red" : "none";
+
   return (
     <div className="flex flex-col p-6 gap-6 border-t border-slate-700">
       <div className="flex  gap-4 items-center">
@@ -74,6 +81,7 @@ export default function Tweet({
           icon={faHeart}
           className="cursor-pointer"
           onClick={handleLike}
+          color={color}
         />
         <div>{likeCounter}</div>
       </div>
