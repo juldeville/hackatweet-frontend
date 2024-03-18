@@ -2,6 +2,8 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { timeAgo } from "@/utils/timeAgo";
+import { time } from "console";
 
 export type TweetProps = {
   firstname: string;
@@ -55,7 +57,7 @@ export default function Tweet({
       });
   };
 
-  let color = isLiked ? "red" : "none";
+  let color = isLiked ? "#f91880" : "white";
 
   return (
     <div className="flex flex-col p-6 gap-6 border-t border-slate-700">
@@ -70,7 +72,7 @@ export default function Tweet({
         <div className=" text-slate-400">
           <span className="font-bold text-white">{firstname}</span> @{username}
         </div>
-        <div className=" text-slate-400"> {date}</div>
+        <div className=" text-slate-400"> {timeAgo(date)}</div>
       </div>
       <div className="flex gap-2">
         <div>{tweetContent}</div>
@@ -83,7 +85,7 @@ export default function Tweet({
           onClick={handleLike}
           color={color}
         />
-        <div>{likeCounter}</div>
+        <div style={{ color: color }}>{likeCounter}</div>
       </div>
     </div>
   );

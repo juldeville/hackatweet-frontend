@@ -6,11 +6,7 @@ type LastTweetsProps = {
   token?: string;
 };
 
-export default function LastTweets({
-  tweetData,
-  date,
-  token,
-}: LastTweetsProps) {
+export default function LastTweets({ tweetData, token }: LastTweetsProps) {
   const tweets = tweetData.toReversed().map((data, index) => {
     return (
       <Tweet
@@ -18,7 +14,7 @@ export default function LastTweets({
         firstname={data.user.firstname}
         username={data.user.username}
         tweetContent={data.tweetContent}
-        date={date}
+        date={data.date}
         tag={data.tag}
         tweetId={data._id}
         token={token}

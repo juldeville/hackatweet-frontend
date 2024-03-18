@@ -6,6 +6,7 @@ import { UserState } from "@/reducers/user";
 import LastTweets from "@/components/tweets/LastTweets";
 import NewTweet from "@/components/tweets/NewTweet";
 import { useState } from "react";
+import SideBar from "@/components/section/SideBar";
 
 export default function Home() {
   const user = useSelector((state: { user: UserState }) => state.user.value);
@@ -38,28 +39,7 @@ export default function Home() {
 
   return (
     <div className="bg-xBlue text-white h-lvh flex">
-      <div className="w-2/6 border-r border-slate-700 flex flex-col justify-between p-10">
-        <Image
-          src="/images/twitterWhite.png"
-          width={64}
-          height={64}
-          alt="X logo"
-          className="rotate-180"
-        />
-        <div className="flex gap-4">
-          <Image
-            src="/images/egg.jpeg"
-            width={48}
-            height={48}
-            alt="X egg"
-            className="rounded-full"
-          />
-          <div>
-            <div>{user.firstname}</div>
-            <div>@{user.username}</div>
-          </div>
-        </div>
-      </div>
+      <SideBar user={user} />
       <div
         className="w-8/12 flex flex-col p-10 gap-16 overflow-auto"
         style={{

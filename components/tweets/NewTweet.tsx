@@ -34,7 +34,7 @@ export default function NewTweet({ addNewTweet, date }: NewTweetProps) {
       body: JSON.stringify(requestBody),
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then(() => {
         const filteredTweetContent = removeHashtags(tweetContent);
         const newTweet: any = {
           date: date,
