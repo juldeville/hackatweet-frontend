@@ -8,10 +8,18 @@ import { removeHashtags } from "@/utils/removeHashtags";
 
 type NewTweetProps = {
   addNewTweet: (newTweet: TweetProps) => void;
-  date: string;
 };
 
-export default function NewTweet({ addNewTweet, date }: NewTweetProps) {
+type tag = {
+  name: string;
+};
+type newTweet = {
+  date: Date;
+  tweetContent: string;
+  tag: tag;
+};
+
+export default function NewTweet({ addNewTweet }: NewTweetProps) {
   const user = useSelector((state: { user: UserState }) => state.user.value);
   const [tweetContent, setTweetContent] = useState("");
 
@@ -37,9 +45,9 @@ export default function NewTweet({ addNewTweet, date }: NewTweetProps) {
       .then(() => {
         const filteredTweetContent = removeHashtags(tweetContent);
         const newTweet: any = {
-          date: date,
+          date: new Date(),
           tweetContent: filteredTweetContent,
-          tag: tag,
+          tag: { name: tag },
           user: {
             firstname: user.firstname,
             username: user.username,

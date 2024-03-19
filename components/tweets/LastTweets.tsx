@@ -2,7 +2,6 @@ import Tweet from "./Tweet";
 
 type LastTweetsProps = {
   tweetData: any[];
-  date: string;
   token?: string;
 };
 
@@ -15,7 +14,7 @@ export default function LastTweets({ tweetData, token }: LastTweetsProps) {
         username={data.user.username}
         tweetContent={data.tweetContent}
         date={data.date}
-        tag={data.tag}
+        tag={data.tag.name}
         tweetId={data._id}
         token={token}
         likeCount={data.likeCount}

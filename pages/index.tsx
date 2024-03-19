@@ -35,8 +35,6 @@ export default function Home() {
 
   console.log("tweetData is", tweetData);
 
-  const date = "a few seconds ago";
-
   return (
     <div className="bg-xBlue text-white h-lvh flex">
       <SideBar user={user} />
@@ -46,8 +44,8 @@ export default function Home() {
           scrollbarWidth: "none",
         }}
       >
-        <NewTweet addNewTweet={addNewTweet} date={date} />
-        <LastTweets tweetData={tweetData} date={date} token={user.token} />
+        <NewTweet addNewTweet={addNewTweet} />
+        <LastTweets tweetData={tweetData} token={user.token} />
       </div>
       <div className="w-2/6 border-l border-slate-700"></div>
     </div>
