@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import LogOutModal from "./logOutModal";
-
+import LogOutModal from "./LogOutModal";
 export type User = {
   firstname: string;
   username: string;

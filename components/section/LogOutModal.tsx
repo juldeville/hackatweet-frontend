@@ -19,26 +19,26 @@ export default function LogOutModal({
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.75)",
+      backgroundColor: "transparent",
     },
     content: {
-      top: "40%",
-      left: "50%",
+      top: "85%",
+      left: "15%",
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "#151d26",
+      backgroundColor: "#1b222d",
       color: "white",
-      width: "33.3%",
+      width: "10%",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
       gap: "15px",
       border: "none",
-      paddingTop: "30px",
-      paddingBottom: "30px",
+      paddingTop: "10px",
+      paddingBottom: "10px",
     },
   };
   return (
@@ -49,7 +49,7 @@ export default function LogOutModal({
         style={customStyles}
         ariaHideApp={false}
       >
-        <div className="font-bold">Log out @{user.username}</div>
+        <div className="font-bold cursor-pointer">Log out @{user.username}</div>
       </Modal>
     </div>
   );

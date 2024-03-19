@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { timeAgo } from "@/utils/timeAgo";
-import { time } from "console";
 
 export type TweetProps = {
   firstname: string;
@@ -22,6 +21,7 @@ export default function Tweet({
   firstname,
   username,
   date,
+
   tweetContent,
   tag,
   tweetId,
