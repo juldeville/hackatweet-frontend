@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         xBlue: "#151d26",
         "xBlue-200": "#3690ed",
+        customDark: "#1b222d",
       },
     },
   },
