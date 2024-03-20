@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -8,7 +7,7 @@ import NewTweet from "@/components/tweets/NewTweet";
 import { useState } from "react";
 import Trends from "@/components/section/Trends";
 import SideBar from "@/components/section/SideBar";
-
+import { fetchTweets, fetchTrends } from "@/utils/apiServices";
 export default function Home() {
   const user = useSelector((state: { user: UserState }) => state.user.value);
 
@@ -16,23 +15,7 @@ export default function Home() {
 
   const [tweetData, setTweetData] = useState<any[]>([]);
   const [trendsData, setTrendsData] = useState<any[]>([]);
-  const [updateTrends, setUpdateTrends] = useState<boolean>(false);
-
-  const fetchTweets = () => {
-    fetch(`http://localhost:3000/tweets/getTweets/${user.token}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setTweetData(data.tweets);
-      });
-  };
-
-  const fetchTrends = () => {
-    fetch("http://localhost:3000/tags/getTags")
-      .then((response) => response.json())
-      .then((data) => {
-        setTrendsData(data.result);
-      });
-  };
+  const [refreshTweets, setRefreshTweets] = useState<boolean>(false);
 
   useEffect(() => {
     if (!user.token) {
@@ -41,20 +24,20 @@ export default function Home() {
   }, [user.token]);
 
   useEffect(() => {
-    fetchTweets();
-    fetchTrends();
+    fetchTweets(user.token).then((data) => setTweetData(data));
+    fetchTrends().then((data) => setTrendsData(data));
   }, []);
 
   useEffect(() => {
-    if (updateTrends) {
-      fetchTweets();
-      fetchTrends();
-      setUpdateTrends(false);
+    if (refreshTweets) {
+      fetchTweets(user.token).then((data) => setTweetData(data));
+      fetchTrends().then((data) => setTrendsData(data));
+      setRefreshTweets(false);
     }
-  }, [updateTrends]);
+  }, [refreshTweets]);
 
   const addNewTweet = () => {
-    setUpdateTrends(true); //
+    setRefreshTweets(true); //
   };
 
   return (
@@ -67,7 +50,11 @@ export default function Home() {
         }}
       >
         <NewTweet addNewTweet={addNewTweet} />
-        <LastTweets tweetData={tweetData} token={user.token} />
+        <LastTweets
+          tweetData={tweetData}
+          token={user.token}
+          refreshTweets={addNewTweet}
+        />
       </div>
       <div className="w-2/6 border-l border-slate-700">
         <Trends trends={trendsData} />

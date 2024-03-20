@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { timeAgo } from "@/utils/timeAgo";
 
@@ -15,24 +15,25 @@ export type TweetProps = {
   likeCount?: number;
   likes?: [string];
   liked: boolean;
+  tweetByUser: boolean;
+  refreshTweets: () => void;
 };
 
 export default function Tweet({
   firstname,
   username,
   date,
-
   tweetContent,
   tag,
   tweetId,
   token,
   likeCount,
   liked,
+  tweetByUser,
+  refreshTweets,
 }: TweetProps) {
   const [likeCounter, setLikeCounter] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
-
-  console.log("like Count is", likeCount);
 
   useEffect(() => {
     if (likeCount) {
@@ -54,6 +55,28 @@ export default function Tweet({
       .then((data: any) => {
         setLikeCounter(data.likeCount);
         setIsLiked(!isLiked);
+      });
+  };
+
+  const handleDelete = () => {
+    console.log("tweet id is", tweetId);
+
+    fetch("http://localhost:3000/tweets/deleteTweet", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        tweetId: tweetId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          refreshTweets();
+        } else if (!data.result) {
+          console.error(data.error);
+        } else {
+          console.log("im here");
+        }
       });
   };
 
@@ -86,6 +109,13 @@ export default function Tweet({
           color={color}
         />
         <div style={{ color: color }}>{likeCounter}</div>
+        {tweetByUser && (
+          <FontAwesomeIcon
+            icon={faTrash}
+            className="cursor-pointer"
+            onClick={handleDelete}
+          />
+        )}
       </div>
     </div>
   );

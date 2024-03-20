@@ -3,9 +3,14 @@ import Tweet from "./Tweet";
 type LastTweetsProps = {
   tweetData: any[];
   token?: string;
+  refreshTweets: () => void;
 };
 
-export default function LastTweets({ tweetData, token }: LastTweetsProps) {
+export default function LastTweets({
+  tweetData,
+  token,
+  refreshTweets,
+}: LastTweetsProps) {
   const tweets = tweetData.toReversed().map((data, index) => {
     return (
       <Tweet
@@ -20,6 +25,8 @@ export default function LastTweets({ tweetData, token }: LastTweetsProps) {
         likeCount={data.likeCount}
         likes={data.likes}
         liked={data.liked}
+        tweetByUser={data.tweetByUser}
+        refreshTweets={refreshTweets}
       />
     );
   });

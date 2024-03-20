@@ -2,7 +2,6 @@ import Button from "../commons/Button";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { UserState } from "@/reducers/user";
-import { TweetProps } from "./Tweet";
 import { extractAndSendHashtags } from "@/utils/extractAndSendHashtags";
 import { removeHashtags } from "@/utils/removeHashtags";
 
@@ -35,6 +34,7 @@ export default function NewTweet({ addNewTweet }: NewTweetProps) {
       .then((response) => response.json())
       .then(() => {
         addNewTweet();
+        setTweetContent("");
       });
   };
   return (
