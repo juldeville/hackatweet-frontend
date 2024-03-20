@@ -1,5 +1,7 @@
 import Modal from "react-modal";
 import { User } from "./SideBar";
+import { useDispatch } from "react-redux";
+import { removeUserFromStore } from "@/reducers/user";
 
 type LogOutModalProps = {
   modalIsOpen: boolean;
@@ -12,6 +14,7 @@ export default function LogOutModal({
   closeModal,
   user,
 }: LogOutModalProps) {
+  const dispatch = useDispatch();
   const customStyles: Modal.Styles = {
     overlay: {
       position: "fixed",
@@ -30,7 +33,7 @@ export default function LogOutModal({
       transform: "translate(-50%, -50%)",
       backgroundColor: "#1b222d",
       color: "white",
-      width: "10%",
+      width: "15%",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -41,15 +44,24 @@ export default function LogOutModal({
       paddingBottom: "10px",
     },
   };
+  const handleLogout = () => {
+    dispatch(removeUserFromStore());
+    closeModal();
+  };
   return (
-    <div>
+    <div className="">
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
         ariaHideApp={false}
       >
-        <div className="font-bold cursor-pointer">Log out @{user.username}</div>
+        <div
+          className="font-semibold cursor-pointer hover:bg-slate-800 w-full text-center  transition-colors duration-300 py-2"
+          onClick={handleLogout}
+        >
+          Log out @{user.username}
+        </div>
       </Modal>
     </div>
   );

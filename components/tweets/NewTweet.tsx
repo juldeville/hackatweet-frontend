@@ -7,16 +7,7 @@ import { extractAndSendHashtags } from "@/utils/extractAndSendHashtags";
 import { removeHashtags } from "@/utils/removeHashtags";
 
 type NewTweetProps = {
-  addNewTweet: (newTweet: TweetProps) => void;
-};
-
-type tag = {
-  name: string;
-};
-type newTweet = {
-  date: Date;
-  tweetContent: string;
-  tag: tag;
+  addNewTweet: () => void;
 };
 
 export default function NewTweet({ addNewTweet }: NewTweetProps) {
@@ -43,18 +34,7 @@ export default function NewTweet({ addNewTweet }: NewTweetProps) {
     })
       .then((response) => response.json())
       .then(() => {
-        const filteredTweetContent = removeHashtags(tweetContent);
-        const newTweet: any = {
-          date: new Date(),
-          tweetContent: filteredTweetContent,
-          tag: { name: tag },
-          user: {
-            firstname: user.firstname,
-            username: user.username,
-          },
-        };
-        addNewTweet(newTweet);
-        setTweetContent("");
+        addNewTweet();
       });
   };
   return (
