@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { timeAgo } from "@/utils/timeAgo";
+import { renderContentWithHashtags } from "@/utils/renderTweetContent";
 
 export type TweetProps = {
   firstname: string;
@@ -82,6 +83,10 @@ export default function Tweet({
 
   let color = isLiked ? "#f91880" : "white";
 
+  const modifiedContent = renderContentWithHashtags(tweetContent);
+
+  console.log("modified content is", modifiedContent);
+
   return (
     <div className="flex flex-col p-6 gap-6 border-t border-slate-700">
       <div className="flex  gap-4 items-center">
@@ -98,8 +103,7 @@ export default function Tweet({
         <div className=" text-slate-400"> {timeAgo(date)}</div>
       </div>
       <div className="flex gap-2">
-        <div>{tweetContent}</div>
-        <div className="font-bold text-xBlue-200">{tag}</div>
+        <div>{modifiedContent}</div>
       </div>
       <div className="flex gap-4 items-center">
         <FontAwesomeIcon

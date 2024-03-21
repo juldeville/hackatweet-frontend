@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { UserState } from "@/reducers/user";
 import { extractAndSendHashtags } from "@/utils/extractAndSendHashtags";
-import { removeHashtags } from "@/utils/removeHashtags";
-
 type NewTweetProps = {
   addNewTweet: () => void;
 };
@@ -15,11 +13,10 @@ export default function NewTweet({ addNewTweet }: NewTweetProps) {
 
   let tag: any = extractAndSendHashtags(tweetContent)[0];
   const handleTweet = () => {
-    const filteredTweetContent = removeHashtags(tweetContent);
     let requestBody: any = {
       firstname: user.firstname,
       username: user.username,
-      tweetContent: filteredTweetContent,
+      tweetContent: tweetContent,
       token: user.token,
     };
     if (tag.length > 0) {
