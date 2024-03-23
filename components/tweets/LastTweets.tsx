@@ -11,7 +11,7 @@ export default function LastTweets({
   token,
   refreshTweets,
 }: LastTweetsProps) {
-  const tweets = tweetData.toReversed().map((data, index) => {
+  const tweets = [...tweetData].reverse().map((data, index) => {
     return (
       <Tweet
         key={index}
