@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type Tag = {
   _id: string;
   name: string;
@@ -9,13 +11,15 @@ type TrendsProps = {
 };
 
 export default function Trends({ trends }: TrendsProps) {
-  console.log("trends are", trends);
   const trendList = trends.map((trend) => {
+    const encodedTrendName = encodeURIComponent(trend.name);
     return (
-      <div className="flex flex-col cursor-pointer">
-        <div className="font-bold">{trend.name}</div>
-        <div className="text-slate-400">{trend.tweets.length} tweet(s)</div>
-      </div>
+      <Link href={`/tag/${encodedTrendName}`}>
+        <div className="flex flex-col cursor-pointer">
+          <div className="font-bold">{trend.name}</div>
+          <div className="text-slate-400">{trend.tweets.length} tweet(s)</div>
+        </div>
+      </Link>
     );
   });
   return (

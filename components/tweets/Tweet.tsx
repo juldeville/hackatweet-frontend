@@ -85,8 +85,6 @@ export default function Tweet({
 
   const modifiedContent = renderContentWithHashtags(tweetContent);
 
-  console.log("modified content is", modifiedContent);
-
   return (
     <div className="flex flex-col p-6 gap-6 border-t border-slate-700">
       <div className="flex  gap-4 items-center">

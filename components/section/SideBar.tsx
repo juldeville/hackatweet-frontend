@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import LogOutModal from "./LogOutModal";
+import Link from "next/link";
 export type User = {
   firstname: string;
   username: string;
@@ -21,13 +22,15 @@ export default function SideBar({ user }: SideBarProps) {
   };
   return (
     <div className="w-2/6 border-r border-slate-700 flex flex-col justify-between py-10 items-center">
-      <Image
-        src="/images/twitterWhite.png"
-        width={64}
-        height={64}
-        alt="X logo"
-        className="rotate-180 cursor-pointer"
-      />
+      <Link href="/">
+        <Image
+          src="/images/twitterWhite.png"
+          width={64}
+          height={64}
+          alt="X logo"
+          className="rotate-180 cursor-pointer"
+        />
+      </Link>
       <LogOutModal
         modalIsOpen={logOutModalIsOpen}
         user={user}
