@@ -12,6 +12,7 @@ export default function LastTweets({
   refreshTweets,
 }: LastTweetsProps) {
   const tweets = [...tweetData].reverse().map((data, index) => {
+    console.log("data name is", data);
     return (
       <Tweet
         key={index}
@@ -19,7 +20,6 @@ export default function LastTweets({
         username={data.user.username}
         tweetContent={data.tweetContent}
         date={data.date}
-        tag={data.tag.name}
         tweetId={data._id}
         token={token}
         likeCount={data.likeCount}

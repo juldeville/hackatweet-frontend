@@ -4,13 +4,13 @@ import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { timeAgo } from "@/utils/timeAgo";
 import { renderContentWithHashtags } from "@/utils/renderTweetContent";
+import { apiUrl } from "@/utils/apiServices";
 
 export type TweetProps = {
   firstname: string;
   username: string;
   date: string;
   tweetContent: string;
-  tag?: string;
   tweetId: string;
   token?: string;
   likeCount?: number;
@@ -25,7 +25,6 @@ export default function Tweet({
   username,
   date,
   tweetContent,
-  tag,
   tweetId,
   token,
   likeCount,
@@ -44,7 +43,7 @@ export default function Tweet({
   }, []);
 
   const handleLike = () => {
-    fetch("https://hackatweet-backend-liard.vercel.app/tweets/handleLike", {
+    fetch(`${apiUrl}tweets/handleLike`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -62,7 +61,7 @@ export default function Tweet({
   const handleDelete = () => {
     console.log("tweet id is", tweetId);
 
-    fetch("https://hackatweet-backend-liard.vercel.app/tweets/deleteTweet", {
+    fetch(`${apiUrl}tweets/deleteTweet`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -74,6 +73,8 @@ export default function Tweet({
         if (data.result) {
           refreshTweets();
         } else if (!data.result) {
+          console.log("hehe im here ");
+
           console.error(data.error);
         } else {
           console.log("im here");

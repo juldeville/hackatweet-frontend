@@ -11,6 +11,8 @@ type TrendsProps = {
 };
 
 export default function Trends({ trends }: TrendsProps) {
+  console.log("trends are", trends);
+
   const trendList = trends.map((trend) => {
     const encodedTrendName = encodeURIComponent(trend.name);
     return (
