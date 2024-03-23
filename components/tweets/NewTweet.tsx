@@ -23,7 +23,7 @@ export default function NewTweet({ addNewTweet }: NewTweetProps) {
       requestBody.tag = tag;
     }
 
-    fetch("http://localhost:3000/tweets/newTweet", {
+    fetch("https://hackatweet-backend-liard.vercel.app/tweets/newTweet", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),

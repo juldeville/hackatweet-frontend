@@ -44,7 +44,7 @@ export default function Tweet({
   }, []);
 
   const handleLike = () => {
-    fetch("http://localhost:3000/tweets/handleLike", {
+    fetch("https://hackatweet-backend-liard.vercel.app/tweets/handleLike", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -62,7 +62,7 @@ export default function Tweet({
   const handleDelete = () => {
     console.log("tweet id is", tweetId);
 
-    fetch("http://localhost:3000/tweets/deleteTweet", {
+    fetch("https://hackatweet-backend-liard.vercel.app/tweets/deleteTweet", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
