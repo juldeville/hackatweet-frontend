@@ -4,7 +4,6 @@ import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { timeAgo } from "@/utils/timeAgo";
 import { renderContentWithHashtags } from "@/utils/renderTweetContent";
-import { apiUrl } from "@/utils/apiServices";
 
 export type TweetProps = {
   firstname: string;
@@ -45,7 +44,7 @@ export default function Tweet({
   }, []);
 
   const handleLike = () => {
-    fetch(`${apiUrl}handleLike`, {
+    fetch("http://localhost:3000/tweets/handleLike", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -63,7 +62,7 @@ export default function Tweet({
   const handleDelete = () => {
     console.log("tweet id is", tweetId);
 
-    fetch(`${apiUrl}deleteTweet`, {
+    fetch("http://localhost:3000/tweets/deleteTweet", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
