@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { UserState } from "@/reducers/user";
 import { extractAndSendHashtags } from "@/utils/extractAndSendHashtags";
+import { apiUrl } from "@/utils/apiServices";
 type NewTweetProps = {
   addNewTweet: () => void;
 };
@@ -23,7 +24,7 @@ export default function NewTweet({ addNewTweet }: NewTweetProps) {
       requestBody.tag = tag;
     }
 
-    fetch("http://localhost:3000/tweets/newTweet", {
+    fetch(`${apiUrl}newTweet`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),

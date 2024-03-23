@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUserToStore, UserState } from "@/reducers/user";
 import { useRouter } from "next/router";
 import Button from "../commons/Button";
+import { apiUrl } from "@/utils/apiServices";
 
 type SignUpModalProps = {
   modalIsOpen: boolean;
@@ -68,7 +69,7 @@ export default function SignUpModal({
   };
 
   const handleSubmitSignUp = () => {
-    fetch("http://localhost:3000/users/signup", {
+    fetch(`${apiUrl}signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
